@@ -1,0 +1,72 @@
+:root {
+  --white: #FFFFFF;
+  --off-white: #FAFAFA;
+  --red-main: #B30808;
+  --red-dark: #B30808;
+  --red-light: #FFF0F0;
+  --black-text: #010101;
+  --gray-text: #1A1A1A;
+  --gray-border: #E0E0E0;
+  --gray-bg: #F5F5F5;
+  --header-total-height: 156px;
+  --header-total-height-mobile: 148px;
+  font-family: 'Inter', sans-serif;
+}
+
+@media (max-width: 639px) {
+  :root {
+    --header-total-height-mobile: 144px;
+  }
+}
+
+.brand-logo {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.brands-marquee {
+  overflow: hidden;
+}
+
+.brands-track {
+  display: flex;
+  width: max-content;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  animation: scroll-left 25s linear infinite;
+}
+
+.brands-marquee:hover .brands-track {
+  animation-play-state: paused;
+}
+
+.announcement-marquee {
+  overflow: hidden;
+}
+
+.announcement-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 45s linear infinite;
+}
+
+.announcement-marquee:hover .announcement-track {
+  animation-play-state: paused;
+}
+
+/* Ensure language dropdown is rendered above all other content */
+.language-dropdown {
+  z-index: 9999 !important;
+}

@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: dibladi-backend
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 5MB
+      max-request-size: 6MB
+  datasource:
+    url: jdbc:mysql://localhost:3306/dibladi_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: dibladi_user
+    password: Dibladi2026
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:dev.dibladi@gmail.com}
+    password: ${MAIL_PASSWORD:dev-password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: 8082
+
+jwt:
+  secret: ${JWT_SECRET:local-dev-jwt-secret-change-me}
+  expiration: 86400000
+  refresh-expiration: 604800000
+
+app:
+  commission-rate: 0.05
+  frontend-url: http://localhost:5173
+  admin-email: support@dblady.com
+  # Dossier de stockage des photos uploadées en développement (relatif à la racine du projet)
+  upload-dir: uploads/vendor-photos
