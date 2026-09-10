@@ -4,6 +4,7 @@ import com.dibladi.dibladibackend.dto.request.OrderCreateRequest;
 import com.dibladi.dibladibackend.dto.response.OrderResponse;
 import com.dibladi.dibladibackend.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<Map<String, String>> createOrder(@RequestBody OrderCreateRequest request, Authentication authentication) {
+    public ResponseEntity<Map<String, String>> createOrder(@Valid @RequestBody OrderCreateRequest request, Authentication authentication) {
         try {
             Map<String, String> response = orderService.createOrder(request, authentication.getName());
             return ResponseEntity.ok(response);

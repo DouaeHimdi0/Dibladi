@@ -109,11 +109,6 @@ function CheckoutPage() {
         deliveryPhone: formValues.phone
       }
 
-      const rawAuth = localStorage.getItem(AUTH_STORAGE_KEY)
-      const authInfo = rawAuth ? JSON.parse(rawAuth) : null
-      const authHeader = authInfo?.token ? `Bearer ${authInfo.token}` : 'no-token'
-      console.log('CheckoutPage createOrder Authorization header:', authHeader)
-
       const { data } = await createOrder(payload)
       const orderNumber = data.orderNumber
       const fullName = `${formValues.firstName} ${formValues.lastName}`.trim()

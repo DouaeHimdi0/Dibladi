@@ -39,15 +39,18 @@ spring:
 
 server:
   port: 8082
+  error:
+    include-stacktrace: never
 
 jwt:
-  secret: ${JWT_SECRET:local-dev-jwt-secret-change-me}
-  expiration: 86400000
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION:10800000}
   refresh-expiration: 604800000
 
 app:
   commission-rate: 0.05
-  frontend-url: http://localhost:5173
+  frontend-url: ${FRONTEND_URL:http://localhost:5173}
+  cors-allowed-origins: ${CORS_ALLOWED_ORIGINS}
   admin-email: support@dblady.com
   # Dossier de stockage des photos uploadées en développement (relatif à la racine du projet)
   upload-dir: uploads/vendor-photos

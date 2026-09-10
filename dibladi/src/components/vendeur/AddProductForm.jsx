@@ -129,7 +129,6 @@ function AddProductForm({ initialProduct = null, initialVariants = [], mode = 'a
         setAttributes(data)
         setOptions((current) => {
           const existingValues = (initialVariants || []).reduce((result, variant) => {
-            const combination = parseCombination(variant.combinationLabel)
             data.forEach((attribute) => {
               const value = combination[attribute.attributeKey]
               if (value && !result[attribute.attributeKey]?.includes(value)) {
@@ -299,10 +298,8 @@ function AddProductForm({ initialProduct = null, initialVariants = [], mode = 'a
               stockQuantity: Number(variant.stockQuantity || 0),
             })),
       }
-      console.log('Données envoyées:', JSON.stringify(payload))
       await onSuccess(payload, variants)
     } catch (submitError) {
-      console.error('Erreur:', submitError.response?.data)
       setError(submitError.response?.data?.message || submitError.response?.data?.error || 'Erreur lors de la publication')
     } finally {
       setSaving(false)

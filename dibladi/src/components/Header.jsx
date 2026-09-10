@@ -277,7 +277,7 @@ function Header() {
     <header className="sticky top-0 z-[9999] isolate overflow-visible bg-white" style={{ zIndex: 9999 }}>
       <div className="relative z-[9999] bg-white">
         <div className="mx-auto flex min-h-[72px] w-full max-w-[1280px] items-center gap-3 px-4 sm:h-[76px] sm:px-6 lg:px-8">
-          <BrandLogo className="shrink-0" textClassName="brand-logo text-[26px] text-red-main sm:text-[28px]" />
+          <BrandLogo className="min-w-0 shrink-0" textClassName="brand-logo text-[21px] text-red-main sm:text-[28px]" />
 
           <div className="hidden min-w-0 flex-1 justify-center md:flex relative" ref={searchContainerRef}>
             <label className="group relative w-full max-w-[320px] lg:max-w-[480px]">
@@ -427,11 +427,11 @@ function Header() {
             )}
           </div>
 
-          <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+          <div className="flex min-w-0 shrink-0 items-center gap-0 sm:gap-2">
             <button
               type="button"
               onClick={() => setIsMobileSearchOpen((open) => !open)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-md text-black-text transition-colors duration-200 hover:bg-red-light hover:text-red-main md:hidden"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md text-black-text transition-colors duration-200 hover:bg-red-light hover:text-red-main md:hidden"
               aria-label="Ouvrir la recherche"
               title="Recherche"
             >
@@ -442,13 +442,13 @@ function Header() {
                 <button
                   type="button"
                   onClick={() => setIsLanguageOpen((open) => !open)}
-                  className="flex items-center gap-2 rounded-[8px] px-3 py-1.5 border border-[#E0E0E0] bg-transparent text-sm text-[#1A1A1A] transition-colors duration-200 hover:border-red-main"
+                  className="flex shrink-0 items-center gap-0 rounded-[8px] px-1 py-1.5 border border-[#E0E0E0] bg-transparent text-sm text-[#1A1A1A] transition-colors duration-200 hover:border-red-main sm:gap-2 sm:px-3"
                 >
                   <span className="flex items-center gap-2">
                     <img
                       src={languageOptions.find((l) => l.code === selectedLanguage)?.flag}
                       alt={languageOptions.find((l) => l.code === selectedLanguage)?.label}
-                      style={{ width: 24, height: 16, objectFit: 'cover', borderRadius: 3 }}
+                      style={{ width: 20, height: 14, objectFit: 'cover', borderRadius: 3 }}
                     />
                     <span className="font-medium">{selectedLanguage}</span>
                   </span>
@@ -484,7 +484,7 @@ function Header() {
                           <img
                             src={option.flag}
                             alt={option.label}
-                            style={{ width: 24, height: 16, objectFit: 'cover', borderRadius: 3 }}
+                            style={{ width: 20, height: 14, objectFit: 'cover', borderRadius: 3 }}
                           />
                           <span className="flex-1 text-sm">{option.label}</span>
                           <span style={{ fontSize: 12, color: 'rgba(51,51,51,0.75)' }}>{option.code}</span>
@@ -561,7 +561,7 @@ function Header() {
               <div className="flex items-center gap-1 sm:gap-2">
                 <Link
                   to="/connexion"
-                  className="inline-flex h-11 min-h-11 w-11 items-center justify-center rounded-md border-[1.5px] border-red-main bg-white text-red-main transition-colors duration-200 hover:bg-red-main hover:text-white sm:w-auto sm:px-3 sm:gap-2"
+                    className="inline-flex h-10 min-h-10 w-10 shrink-0 items-center justify-center rounded-md border-[1.5px] border-red-main bg-white text-red-main transition-colors duration-200 hover:bg-red-main hover:text-white sm:h-11 sm:min-h-11 sm:w-auto sm:px-3 sm:gap-2"
                   aria-label="Se connecter"
                   title="Se connecter"
                 >
@@ -572,7 +572,7 @@ function Header() {
 
                 <Link
                   to="/vendeur/inscription"
-                  className="inline-flex h-11 min-h-11 w-11 items-center justify-center rounded-md bg-red-main text-white transition-colors duration-200 hover:bg-red-dark sm:w-auto sm:px-3 sm:gap-2"
+                  className="inline-flex h-10 min-h-10 w-10 shrink-0 items-center justify-center rounded-md bg-red-main text-white transition-colors duration-200 hover:bg-red-dark sm:h-11 sm:min-h-11 sm:w-auto sm:px-3 sm:gap-2"
                   aria-label="Vendre sur DiblaDi"
                   title="Vendre sur DiblaDi"
                 >
@@ -585,7 +585,7 @@ function Header() {
 
             <Link
               to="/panier"
-              className="relative inline-flex h-11 min-h-11 w-11 items-center justify-center rounded-md text-black-text transition-colors duration-200 hover:text-red-main"
+              className="relative inline-flex h-10 min-h-10 w-10 shrink-0 items-center justify-center rounded-md text-black-text transition-colors duration-200 hover:text-red-main sm:h-11 sm:min-h-11"
               aria-label="Voir le panier"
             >
               <ShoppingCart size={20} aria-hidden="true" />
@@ -638,7 +638,7 @@ function Header() {
           <button type="button" onPointerDown={(event) => { event.preventDefault(); event.stopPropagation(); setMobileMenuOpen((open) => !open) }} onClick={(event) => { event.preventDefault(); event.stopPropagation() }} className="inline-flex h-10 items-center gap-2 rounded-lg border border-gray-border px-3 text-sm font-semibold text-black-text md:hidden" aria-label={mobileMenuOpen ? 'Fermer les catégories' : 'Ouvrir les catégories'}>
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />} Catégories
           </button>
-          <nav className="hide-scrollbar hidden overflow-visible md:block" aria-label="Catégories">
+          <nav className="hide-scrollbar hidden overflow-x-auto md:block" aria-label="Catégories">
             <ul className="flex w-max min-w-full flex-nowrap items-center justify-start gap-1">
               {!categoriesLoading && activeCategories.map((category) => (
                 <li key={category.id} className="relative">

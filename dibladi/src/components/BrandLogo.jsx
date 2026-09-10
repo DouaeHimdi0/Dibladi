@@ -11,7 +11,7 @@ function BrandLogo({ className = '' }) {
       <img
         src={logo}
         alt="Dibladi"
-        className="h-28 w-auto object-contain"
+        className="h-24 w-auto object-contain sm:h-14"
       />
     </Link>
   )

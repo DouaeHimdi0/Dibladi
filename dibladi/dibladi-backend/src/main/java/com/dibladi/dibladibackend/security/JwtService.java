@@ -10,8 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import javax.crypto.SecretKey;
 import java.util.Date;
@@ -25,22 +23,14 @@ public class JwtService {
 
     @PostConstruct
     public void init() {
+        if (jwtConfig.getSecret() == null || jwtConfig.getSecret().getBytes(StandardCharsets.UTF_8).length < 32) {
+            throw new IllegalStateException("JWT_SECRET must be configured with at least 256 bits.");
+        }
         byte[] keyBytes = jwtConfig.getSecret().getBytes(StandardCharsets.UTF_8);
-        if (keyBytes.length < 32) {
-            keyBytes = deriveKey(keyBytes);
-        } else if (keyBytes.length > 32) {
+        if (keyBytes.length > 32) {
             keyBytes = Arrays.copyOf(keyBytes, 32);
         }
         signingKey = Keys.hmacShaKeyFor(keyBytes);
-    }
-
-    private byte[] deriveKey(byte[] secretBytes) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            return digest.digest(secretBytes);
-        } catch (NoSuchAlgorithmException e) {
-            throw new IllegalStateException("Unable to initialize JWT key derivation", e);
-        }
     }
 
     public String generateToken(User user) {
